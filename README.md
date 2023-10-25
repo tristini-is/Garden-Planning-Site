@@ -1,2 +1,2 @@
-# cs3300
+# Garden Planning Site
  
