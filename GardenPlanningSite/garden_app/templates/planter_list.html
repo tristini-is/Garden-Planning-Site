@@ -1,0 +1,16 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+<h1>List of Available Planters</h1>
+{% if planter_list %}
+    <ol>
+        {% for planter in planter_list %}
+            <li>
+                <a href="{{ planter.get_absolute_url }}">{{ planter.name }}</a>
+            </li>
+        {% endfor %}
+    </ol>
+{% else %}
+    <p>There are no planters logged.</p>
+{% endif %}
+{% endblock %}

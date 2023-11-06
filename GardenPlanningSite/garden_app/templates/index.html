@@ -1,0 +1,18 @@
+{% extends "base_template.html" %}
+{% load static%}
+
+{% block content %}
+<div class="container">
+    <h1 class="display-4 mt-5 mb-4">Welcome to Garden Planning</h1>
+    
+    <div class="row">
+        <div class="col-lg-6 col-md-64">
+            <p class="lead mb-4">Plan your garden with ease and style. Our platform provides you with the tools to make a beautiful design with a system that's easy to use.</p>
+            <a class="btn btn-primary" href="{% url 'index' %}">Get Started</a>
+        </div>
+        <div class="col-lg-6 col-md-12">
+        <img src="{% static 'images/garden.jpg' %}" alt="Picture of Garden" class="img-fluid rounded"> 
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+<h1>{{ plant.name }}</h1>
+<p><strong>Care Instructions:</strong> {{ plant.care }} </p>
+<p><Strong>Date Planted:</strong> {{plant.plantDate }}</p>
+<p><strong>Box: </strong> {{ plant.box }} </p>
+
+{% endblock %}
