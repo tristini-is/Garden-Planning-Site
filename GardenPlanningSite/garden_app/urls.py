@@ -11,5 +11,6 @@ urlpatterns = [
    path('planter/<int:planter_id>/new_plant/', views.createPlant, name='create_plant'),
    path('planter/plant/<int:plant_id>/delete/', views.deletePlant, name='delete_plant'),
    path('plants/<int:plant_id>/update/', views.updatePlant, name='update_plant'),
+   path('accounts/register/',views.registerPage, name = 'register'),
 
 ]

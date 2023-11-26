@@ -1,6 +1,8 @@
 from django.forms import ModelForm
 from .models import Planter, Plant
 from django.forms.widgets import DateInput
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 
 class PlanterForm (ModelForm) :
     class Meta:
@@ -34,3 +36,8 @@ class PlantForm (ModelForm):
                 return redirect('planter-detail', planter_id)
 
         context = {'form': form}
+
+class CreateUserForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username','email','password1','password2']

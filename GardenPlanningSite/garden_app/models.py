@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
+
 # Create your models here.
 class Planter(models.Model):
     name = models.CharField(max_length=200, blank = True)
@@ -10,6 +11,7 @@ class Planter(models.Model):
     
     def get_absolute_url(self):
         return reverse('planter-detail', args=[str(self.id)])
+
 
 class Plant(models.Model):
     name = models.CharField(max_length=200, blank = True)

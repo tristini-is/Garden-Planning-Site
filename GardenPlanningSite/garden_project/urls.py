@@ -20,6 +20,7 @@ from garden_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('', include('garden_app.urls')),
 
 ]

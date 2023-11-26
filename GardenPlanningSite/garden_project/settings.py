@@ -31,13 +31,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'garden_app',
+    'django.contrib.admin',
     'bootstrap5',
 ]
 
@@ -60,7 +60,7 @@ ROOT_URLCONF = 'garden_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -136,3 +136,4 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/images/'
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

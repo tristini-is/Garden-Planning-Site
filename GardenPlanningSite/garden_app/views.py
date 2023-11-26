@@ -4,6 +4,10 @@ from django.views import generic
 from .models import *
 from . import views
 from garden_app.forms import *
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
+from django.contrib import messages
+
 # Create your views here.
 
 def index(request):
@@ -28,7 +32,8 @@ class PlanterDetailView(generic.DetailView):
 class PlantDetailView(generic.DetailView):
     model = Plant
     template_name = 'plant_detail.html'
-    
+
+@login_required
 def createPlant(request, planter_id):
     form = PlanterForm()
     planter = Planter.objects.get(pk=planter_id)
@@ -48,6 +53,7 @@ def createPlant(request, planter_id):
     context = {'form': form}
     return render(request, 'plant_form.html', context)
 
+@login_required
 def deletePlant(request, plant_id):
     plant = get_object_or_404(Plant, pk=plant_id)
 
@@ -60,6 +66,7 @@ def deletePlant(request, plant_id):
     context = {'plant': plant, 'planter': plant.box}
     return render(request, 'plant_delete.html', {'plant': plant}) 
 
+@login_required
 def updatePlant(request, plant_id):
     plant = get_object_or_404(Plant, pk=plant_id)
     if request.method == 'POST':
@@ -73,3 +80,18 @@ def updatePlant(request, plant_id):
 
         return render(request, 'plant_update.html', {'form': form, 'plant': plant})
 
+def registerPage(request):
+    form = CreateUserForm()
+
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            username = form.cleaned_data.get('username')
+            group, created = Group.objects.get_or_create(name='Gardeners')
+            user.groups.add(group)
+            messages.success(request, 'Account was created for '+ username)
+            return redirect('login')
+        
+    context={'form':form}
+    return render(request, 'registration/register.html', context)
