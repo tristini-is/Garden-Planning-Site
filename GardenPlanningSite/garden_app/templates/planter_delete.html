@@ -1,0 +1,18 @@
+{% extends 'base_template.html' %}
+
+<!-- Replace block content in base_template.html -->
+{% block content %}
+
+
+<h2> Delete Planter? </h2>
+
+<p> Are you sure you want to delete '{{ planter.name }}'? All plants will be lost. </p>
+<form action="{% url 'delete_planter' plant.id %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">Confirm</button>
+    <a href="{% url 'planter-list' %}" class="btn btn-primary btn-lg" role="button" >Cancel</a>
+    <input type='hidden' name='confirm' value='yes'>
+</form>
+
+
+{% endblock %}

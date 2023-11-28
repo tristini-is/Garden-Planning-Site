@@ -29,6 +29,46 @@ class PlanterDetailView(generic.DetailView):
 
         return context
 
+#planter crud
+@login_required
+def createPlanter(request):
+    if request.method == 'POST':
+        form = PlanterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('planters')  
+    else:
+        form = PlanterForm()
+
+    context = {'form': form}
+    return render(request, 'planter_form.html', context)
+
+@login_required
+def updatePlanter(request, planter_id):
+    planter = get_object_or_404(Planter, pk=planter_id)
+
+    if request.method == 'POST':
+        form = PlanterForm(request.POST, instance=planter)
+        if form.is_valid():
+            form.save()
+            return redirect('planters')  
+    else:
+        form = PlanterForm(instance=planter)
+
+    context = {'form': form}
+    return render(request, 'planter_form.html', context)
+@login_required
+def deletePlanter(request, planter_id):
+    planter = get_object_or_404(Planter, pk=planter_id)
+
+    if request.method == 'POST':
+        planter.delete()
+        return redirect('planters')  
+
+    context = {'planter': planter}
+    return render(request, 'planter_confirm_delete.html', context)
+
+
 class PlantDetailView(generic.DetailView):
     model = Plant
     template_name = 'plant_detail.html'

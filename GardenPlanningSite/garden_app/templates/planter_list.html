@@ -1,16 +1,22 @@
 {% extends "base_template.html" %}
 
 {% block content %}
-<h1>List of Available Planters</h1>
-{% if planter_list %}
-    <ol>
+  <div class="container mt-5">
+    <h1>List of Available Planters</h1>
+    <a class="btn btn-primary" href="{% url 'create_planter' %}" role="button">
+        <i class="bi bi-plus"></i> New Planter
+    </a>
+
+    {% if planter_list %}
+      <ul class="list-group mt-3">
         {% for planter in planter_list %}
-            <li>
-                <a href="{{ planter.get_absolute_url }}">{{ planter.name }}</a>
-            </li>
+          <li class="list-group-item">
+            <a href="{{ planter.get_absolute_url }}">{{ planter.name }}</a>
+          </li>
         {% endfor %}
-    </ol>
-{% else %}
-    <p>There are no planters logged.</p>
-{% endif %}
+      </ul>
+    {% else %}
+      <p class="mt-3">There are no planters logged.</p>
+    {% endif %}
+  </div>
 {% endblock %}
