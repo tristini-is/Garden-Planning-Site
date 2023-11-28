@@ -15,5 +15,6 @@ urlpatterns = [
    path('planter/new_planter/', views.createPlanter, name='create_planter'),
    path('planter/<int:planter_id>/delete/', views.deletePlanter, name='delete_planter'),
    path('planter/<int:planter_id>/update/', views.updatePlanter, name='update_planter'),
-
+   path('update_plant_order/<int:plant_id>/', views.update_plant_order, name='update_plant_order'),
+   
 ]

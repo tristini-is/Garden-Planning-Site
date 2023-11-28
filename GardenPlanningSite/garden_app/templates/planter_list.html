@@ -28,13 +28,14 @@
             </div>
           </div>
           {% if planterPlantsItem.plants %}
-            <ul class="list-group mt-3">
-              {% for plant in planterPlantsItem.plants %}
-                <li class="list-group-item">
-                  {{ plant.name }} - {{ plant.care }}
-                </li>
-              {% endfor %}
-            </ul>
+          <ul class="list-group mt-3 data-mdb-sortable">
+            {% for plant in planterPlantsItem.plants %}
+              <li class="list-group-item sortable-item" data-plant-id="{{ plant.id }}">
+                {{ plant.name }} - {{ plant.care }}
+              </li>
+            {% endfor %}
+          </ul>
+          
           {% else %}
             <p class="mt-3">No plants for this planter.</p>
           {% endif %}

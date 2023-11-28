@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.views import generic
 from .models import *
 from . import views
@@ -22,15 +22,10 @@ class PlanterListView (generic.ListView):
         
         planterPlants = []
 
-        # Iterate over each planter in the queryset
         for planter in context['object_list']:
-            # Get the plants associated with the current planter
             plants = planter.plant_set.all()
 
-            # Append the planter and its associated plants to the list
             planterPlants.append({'planter': planter, 'plants': plants})
-
-        # Add the list of planter_plants to the context
         context['planterPlants'] = planterPlants
 
         return context
@@ -153,3 +148,19 @@ def registerPage(request):
         
     context={'form':form}
     return render(request, 'registration/register.html', context)
+
+
+def update_plant_order(request, plant_id):
+    if request.method == 'POST':
+        new_order = int(request.POST.get('order', 0))
+
+        # Retrieve the plant from the database
+        plant = Plant.objects.get(pk=plant_id)
+
+        # Update the order field
+        plant.order = new_order
+        plant.save()
+
+        return JsonResponse({'success': True})
+    else:
+        return JsonResponse({'success': False, 'error': 'Invalid request method'})
