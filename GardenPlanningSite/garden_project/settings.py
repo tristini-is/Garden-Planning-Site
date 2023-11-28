@@ -139,3 +139,5 @@ MEDIA_URL = '/images/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 SELENIUM_FIREFOX_DRIVER_PATH = '/geckodriver.exe'
+
+LOGIN_REDIRECT_URL = '/'

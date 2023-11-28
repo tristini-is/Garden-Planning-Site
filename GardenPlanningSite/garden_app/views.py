@@ -17,6 +17,24 @@ class PlanterListView (generic.ListView):
     model = Planter
     template_name = 'planter_list.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        planterPlants = []
+
+        # Iterate over each planter in the queryset
+        for planter in context['object_list']:
+            # Get the plants associated with the current planter
+            plants = planter.plant_set.all()
+
+            # Append the planter and its associated plants to the list
+            planterPlants.append({'planter': planter, 'plants': plants})
+
+        # Add the list of planter_plants to the context
+        context['planterPlants'] = planterPlants
+
+        return context
+
 class PlanterDetailView(generic.DetailView):
     model = Planter
     template_name = 'planter_detail.html'
@@ -66,7 +84,7 @@ def deletePlanter(request, planter_id):
         return redirect('planters')  
 
     context = {'planter': planter}
-    return render(request, 'planter_confirm_delete.html', context)
+    return render(request, 'planter_delete.html', context)
 
 
 class PlantDetailView(generic.DetailView):

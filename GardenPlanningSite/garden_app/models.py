@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.db.models.functions import Lower
 
 
 # Create your models here.
@@ -20,3 +21,6 @@ class Plant(models.Model):
     box = models.ForeignKey(Planter, on_delete=models.CASCADE, default = None, null=True, blank=True)
     def get_absolute_url(self):
         return reverse('plant-detail', args=[str(self.id)])
+
+    class Meta:
+        ordering = [Lower('name')]
