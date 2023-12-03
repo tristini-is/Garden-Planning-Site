@@ -43,16 +43,13 @@ class PlantModelTest(TestCase):
 
 # Webdriver tests
 class LoginFormTest(LiveServerTestCase):
-    # Test to make sure login page works, but will pass even if there's an error
     def test_login(self):
         selenium = webdriver.Firefox()
         selenium.get('http://127.0.0.1:8000/planter/2/new_plant/')
 
         try:
-             plant_name = selenium.find_element(By.ID, 'id_name')
-            # Add assertions or other actions with plant_name if needed
+            plant_name = selenium.find_element(By.ID, 'id_name')
         except NoSuchElementException as e:
-            # Handle the exception (e.g., print a message or log it)
             print(f"Element with id 'id_name' not found: {e}")
         finally:
             selenium.quit()
